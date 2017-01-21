@@ -45,13 +45,13 @@ public class typer : MonoBehaviour {
 		time += Time.deltaTime;
 		timeWave += Time.deltaTime;
 
-		if (Input.GetButtonDown("Fire1")) {
+		if (Input.GetButtonDown("Jump")) {
 			//bpm += 1f;
 			taps.Add(time);
 		}
 
 		// calc bpm
-		if (taps.Count > 0) {
+		if (taps.Count > 1) {
 			taps.RemoveAll(IsTooLongAgo);
 
 			float range = time - taps[0];
@@ -61,8 +61,8 @@ public class typer : MonoBehaviour {
 		}
 
 		//if (Input.GetButtonDown("Jump")) {
-			// TODO: only update freq of waving after certain time window to not kill u
-		if (Mathf.FloorToInt(time*100) % 10 == 0) { 
+		// only update every 10ms
+		if (Mathf.FloorToInt(time*1000) % 10 == 0) { 
 			float oldWave = Mathf.Sin(freq*timeWave);
 				//Debug.Log("old timeWave + wave: "+ timeWave + "   " + oldWave);
 				// freq += 0.1f;
