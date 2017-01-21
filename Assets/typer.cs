@@ -8,7 +8,6 @@ public class typer : MonoBehaviour {
 	public float freq;
 	public Text debugText;
 	public Text counterText;
-	public bool isGoingUp;
 
 	public static float tapInterval;
 	public List<float> taps;
@@ -16,16 +15,22 @@ public class typer : MonoBehaviour {
 	public Material matHappy;
 	public Material matSad;
 
-	public float goodThreshold; // difference in y that is permissible
-	public float goodTime;
+	public float happyThreshold; // difference in y that is permissible
+	public float happyDuration;
 
 	
 	//private float timeStart;
+
+	private bool isGoingUp;
+	private bool isHappy;
+
 	private static float time; // this one strictly increases
 	private float timeWave; // this one gets phase shifted and % 2PI 
 	private float bpm;
 	private GameObject targetWave;
 	private Wave targetWaveScript;
+	private float happyTimeStart; // every time we get good, start counting down
+	
 
 
 	// Use this for initialization
@@ -34,16 +39,15 @@ public class typer : MonoBehaviour {
 		Application.targetFrameRate = 60;
 
 		freq = 1f;
-		isGoingUp = true;
 
 		tapInterval = 6f;
 		taps = new List<float>();
 
-		goodThreshold = 0.5f;
-		goodTime = 2f;
+		happyThreshold = 1.0f;
+		happyDuration = 1f;
 
-
-
+		isGoingUp = true;
+		isHappy = false;
 
 		time = 0f;
 		timeWave = 0f;
@@ -94,11 +98,40 @@ public class typer : MonoBehaviour {
 		float targetY = targetWaveScript.getYForX(transform.position.x);
 		float targetDist = Mathf.Abs(targetY - y);
 
-		if (targetDist < goodThreshold) {
+		if (targetDist < happyThreshold) {
 			// happy
 			this.GetComponent<Renderer>().material = matHappy;
+			if (!isHappy) {
+				happyTimeStart = time;
+				isHappy = true;
+			}
+
 		} else {
 			this.GetComponent<Renderer>().material = matSad;
+			isHappy = false;
+		}
+
+		// display the countdown
+		if (isHappy) {
+			float happyTimeElapsed = time - happyTimeStart;
+			float countStep = happyDuration / 3f; //divide the duration by 3
+
+			if (happyTimeElapsed < countStep) {
+				counterText.text = "3";
+			} else if (happyTimeElapsed < 2f * countStep) {
+				counterText.text = "2";
+			} else if (happyTimeElapsed < happyDuration) {
+				counterText.text = "1";
+			} else {
+				counterText.text = "0";
+				// WIN!
+			}
+
+
+
+
+		} else {
+			counterText.text = "";
 		}
 
 
