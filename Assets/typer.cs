@@ -12,11 +12,13 @@ public class typer : MonoBehaviour {
 	public static float tapInterval;
 	public List<float> taps;
 
-
+	
 	//private float timeStart;
 	private static float time; // this one strictly increases
 	private float timeWave; // this one gets phase shifted and % 2PI 
 	private float bpm;
+	private GameObject targetWave;
+	private Wave targetWaveScript;
 
 
 	// Use this for initialization
@@ -37,7 +39,8 @@ public class typer : MonoBehaviour {
 		//taps_list.Add(2f);
 
 
-		
+		targetWave = GameObject.FindWithTag("wave");
+		targetWaveScript = targetWave.GetComponent<Wave>();		
 	}
 	
 	// Update is called once per frame
@@ -45,7 +48,7 @@ public class typer : MonoBehaviour {
 		time += Time.deltaTime;
 		timeWave += Time.deltaTime;
 
-		if (Input.GetButtonDown("Jump")) {
+		if (Input.anyKeyDown) {
 			//bpm += 1f;
 			taps.Add(time);
 		}
@@ -63,7 +66,40 @@ public class typer : MonoBehaviour {
 		//if (Input.GetButtonDown("Jump")) {
 		// only update every 10ms
 		if (Mathf.FloorToInt(time*1000) % 10 == 0) { 
-			float oldWave = Mathf.Sin(freq*timeWave);
+			timeWave = UpdatePlayerFreq(timeWave);
+		}
+
+			//Debug.Log("new timeWave + wave: "+ timeWave + "   " + Mathf.Sin(freq*timeWave));
+		//}
+
+		float y = Mathf.Sin(freq*timeWave);
+		transform.position = new Vector3(0, y, 0);
+		// keep track of going up or down
+		isGoingUp = (Mathf.Sign(Mathf.Cos(freq*timeWave)) > 0f);
+
+		// CHECK against the target wave.
+		float targetY = targetWaveScript.getYForX(transform.position.x);
+		float targetDist = Mathf.Abs(targetY - y);
+
+		
+
+
+
+		freqText.text = "time: " + time.ToString("0.##") + 
+			"\nbpm: " + bpm.ToString("0.##") +
+			"\n\ntimeWave: " + timeWave.ToString("0.##") + 
+			"\nposition.y: " + y.ToString("0.##") + 
+			"\nfrequency: " + freq.ToString("0.##") +
+			"\n\ntargetY: " + targetY.ToString("0.##") +
+			"\n targetDist: " + targetDist.ToString("0.##");
+
+		// Debug.Log(freqText.text);
+		// Debug.Log(Mathf.Sin(timeWave));
+		
+	}
+
+	private float UpdatePlayerFreq(float t) {
+		float oldWave = Mathf.Sin(freq*t);
 				//Debug.Log("old timeWave + wave: "+ timeWave + "   " + oldWave);
 				// freq += 0.1f;
 
@@ -72,33 +108,15 @@ public class typer : MonoBehaviour {
 				// } else {
 				// 	timeWave = (Mathf.Asin(-oldWave) + Mathf.PI)/freq;				
 				// }
-			if (bpm != 0) 
-				freq = bpm;
+		if (bpm != 0) 
+			freq = bpm;
 
-			if (isGoingUp) {
-				timeWave = Mathf.Asin(oldWave)/freq;
-			} else {
-				timeWave = (Mathf.Asin(-oldWave) + Mathf.PI)/freq;				
-			}
+		if (isGoingUp) {
+			t = Mathf.Asin(oldWave)/freq;
+		} else {
+			t = (Mathf.Asin(-oldWave) + Mathf.PI)/freq;				
 		}
-
-			//Debug.Log("new timeWave + wave: "+ timeWave + "   " + Mathf.Sin(freq*timeWave));
-		//}
-
-		float wave = Mathf.Sin(freq*timeWave);
-		transform.position = new Vector3(0, wave, 0);
-		// keep track of going up or down
-		isGoingUp = (Mathf.Sign(Mathf.Cos(freq*timeWave)) > 0f);
-
-		freqText.text = "time: " + time.ToString("0.##") + 
-			"\nbpm: " + bpm.ToString("0.##") +
-			"\n\ntimeWave: " + timeWave.ToString("0.##") + 
-			"\nposition: " + wave.ToString("0.##") + 
-			"\nfrequency: " + freq.ToString("0.##");
-
-		// Debug.Log(freqText.text);
-		// Debug.Log(Mathf.Sin(timeWave));
-		
+		return t;
 	}
 
 	// predicate returns true if tapTime occured before the interval
