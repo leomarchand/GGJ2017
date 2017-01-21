@@ -12,6 +12,12 @@ public class typer : MonoBehaviour {
 	public static float tapInterval;
 	public List<float> taps;
 
+	public Material matHappy;
+	public Material matSad;
+
+	public float goodThreshold; // difference in y that is permissible
+	public float goodTime;
+
 	
 	//private float timeStart;
 	private static float time; // this one strictly increases
@@ -31,6 +37,12 @@ public class typer : MonoBehaviour {
 
 		tapInterval = 6f;
 		taps = new List<float>();
+
+		goodThreshold = 2f;
+		goodTime = 2f;
+
+
+
 
 		time = 0f;
 		timeWave = 0f;
@@ -81,8 +93,10 @@ public class typer : MonoBehaviour {
 		float targetY = targetWaveScript.getYForX(transform.position.x);
 		float targetDist = Mathf.Abs(targetY - y);
 
-		
+		if (targetDist < goodThreshold) {
+			// happy
 
+		}
 
 
 		freqText.text = "time: " + time.ToString("0.##") + 
