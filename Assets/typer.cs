@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class typer : MonoBehaviour {
 
 	public float freq;
-	public Text freqText;
+	public Text debugText;
+	public Text counterText;
 	public bool isGoingUp;
 
 	public static float tapInterval;
@@ -38,7 +39,7 @@ public class typer : MonoBehaviour {
 		tapInterval = 6f;
 		taps = new List<float>();
 
-		goodThreshold = 2f;
+		goodThreshold = 0.5f;
 		goodTime = 2f;
 
 
@@ -95,11 +96,13 @@ public class typer : MonoBehaviour {
 
 		if (targetDist < goodThreshold) {
 			// happy
-
+			this.GetComponent<Renderer>().material = matHappy;
+		} else {
+			this.GetComponent<Renderer>().material = matSad;
 		}
 
 
-		freqText.text = "time: " + time.ToString("0.##") + 
+		debugText.text = "time: " + time.ToString("0.##") + 
 			"\nbpm: " + bpm.ToString("0.##") +
 			"\n\ntimeWave: " + timeWave.ToString("0.##") + 
 			"\nposition.y: " + y.ToString("0.##") + 
