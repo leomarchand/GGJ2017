@@ -27,7 +27,7 @@ public class typer : MonoBehaviour {
 		freq = 1f;
 		isGoingUp = true;
 
-		tapInterval = 20f;
+		tapInterval = 6f;
 		taps = new List<float>();
 
 		time = 0f;
@@ -62,22 +62,24 @@ public class typer : MonoBehaviour {
 
 		//if (Input.GetButtonDown("Jump")) {
 			// TODO: only update freq of waving after certain time window to not kill u
-		float oldWave = Mathf.Sin(freq*timeWave);
-			//Debug.Log("old timeWave + wave: "+ timeWave + "   " + oldWave);
-			// freq += 0.1f;
+		if (Mathf.FloorToInt(time*100) % 10 == 0) { 
+			float oldWave = Mathf.Sin(freq*timeWave);
+				//Debug.Log("old timeWave + wave: "+ timeWave + "   " + oldWave);
+				// freq += 0.1f;
 
-			// if (isGoingUp) {
-			// 	timeWave = Mathf.Asin(oldWave)/freq;
-			// } else {
-			// 	timeWave = (Mathf.Asin(-oldWave) + Mathf.PI)/freq;				
-			// }
-		if (bpm != 0) 
-			freq = bpm;
+				// if (isGoingUp) {
+				// 	timeWave = Mathf.Asin(oldWave)/freq;
+				// } else {
+				// 	timeWave = (Mathf.Asin(-oldWave) + Mathf.PI)/freq;				
+				// }
+			if (bpm != 0) 
+				freq = bpm;
 
-		if (isGoingUp) {
-			timeWave = Mathf.Asin(oldWave)/freq;
-		} else {
-			timeWave = (Mathf.Asin(-oldWave) + Mathf.PI)/freq;				
+			if (isGoingUp) {
+				timeWave = Mathf.Asin(oldWave)/freq;
+			} else {
+				timeWave = (Mathf.Asin(-oldWave) + Mathf.PI)/freq;				
+			}
 		}
 
 			//Debug.Log("new timeWave + wave: "+ timeWave + "   " + Mathf.Sin(freq*timeWave));
