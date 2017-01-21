@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Wave : MonoBehaviour {
-	private static int size = 50;
+	public static int size = 50;
 	private Vector3 [] vectors = new Vector3 [size];
 	private float [] xValues = new float [size];
 	private LineRenderer lineRenderer;

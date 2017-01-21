@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TailWave : MonoBehaviour {
-	private static int size = 25;
-	private Vector3 [] vectors = new Vector3 [size];
-	private float [] xValues = new float [size];
+	private int size;
+	private Vector3 [] vectors;
+	private float [] xValues;
 	private LineRenderer lineRenderer;
 	private float offset = 0f;
 	private float minX;
@@ -22,13 +22,20 @@ public class TailWave : MonoBehaviour {
         ballY = ball.transform.position.y;
         history = new List<float>();
 
+        GameObject targetWave = GameObject.FindWithTag("wave");
+		Wave targetWaveScript = targetWave.GetComponent<Wave>();
+
+        size = Wave.size / 2;
+
+        vectors = new Vector3 [size];
+        xValues = new float [size];
+
         multiplier = Random.Range (0f, 1f);
 		lineRenderer = this.gameObject.GetComponent <LineRenderer> ();
 		lineRenderer.numPositions = size;
 		lineRenderer.startWidth = 0.1f;
 		lineRenderer.endWidth = 0.1f;
 		minX = -Camera.main.orthographicSize * Camera.main.aspect;
-		maxX = -minX;
 		float currentX = minX;
 		gap = (- minX) / size;
 		for (int i = 0; i < size; i++) {
