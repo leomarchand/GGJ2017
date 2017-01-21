@@ -125,6 +125,7 @@ public class typer : MonoBehaviour {
 				counterText.text = "1";
 			} else {
 				counterText.text = "0";
+				// WIN!
 				SceneManager.LoadScene ("greetings");
 			}
 

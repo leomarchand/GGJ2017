@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TailWave : MonoBehaviour {
-	private static int size = 50;
+	private static int size = 25;
 	private Vector3 [] vectors = new Vector3 [size];
 	private float [] xValues = new float [size];
 	private LineRenderer lineRenderer;
@@ -34,7 +34,6 @@ public class TailWave : MonoBehaviour {
 		for (int i = 0; i < size; i++) {
             history.Add(ballY);
 
-			float currentY = getYForX (currentX);
 			vectors [i] = new Vector3 (currentX, ballY, 0);
 			xValues [i] = currentX;
 			currentX += gap;
@@ -44,17 +43,15 @@ public class TailWave : MonoBehaviour {
 	void Update () {
         ballY = ball.transform.position.y;
 
+        // cycle the new position in history
+        history.Add(ballY);
+        history.RemoveAt(0);
 
 
 		for (int i = 0; i < size; i++) {
-			float currentY = getYForX (xValues[i]);
-			vectors [i] = new Vector3 (xValues[i], currentY, 0);
+			vectors [i] = new Vector3 (xValues[i], history[i], 0);
 		}
-		offset += gap;
 		lineRenderer.SetPositions (vectors);
 	}
 
-	public float getYForX (float x) {
-		return Mathf.Sin (multiplier*(x + offset));
-	}
 }
