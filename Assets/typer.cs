@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class typer : MonoBehaviour {
 
@@ -124,7 +125,7 @@ public class typer : MonoBehaviour {
 				counterText.text = "1";
 			} else {
 				counterText.text = "0";
-				// WIN!
+				SceneManager.LoadScene ("greetings");
 			}
 
 
