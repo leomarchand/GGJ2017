@@ -11,8 +11,10 @@ public class Wave : MonoBehaviour {
 	private float minX;
 	private float maxX;
 	private float gap;
+	private float multiplier;
 
 	void Start () {
+		multiplier = Random.Range (0f, 1f);
 		lineRenderer = this.gameObject.GetComponent <LineRenderer> ();
 		lineRenderer.numPositions = size;
 		lineRenderer.startWidth = 0.1f;
@@ -22,7 +24,7 @@ public class Wave : MonoBehaviour {
 		float currentX = minX;
 		gap = (maxX - minX) / size;
 		for (int i = 0; i < size; i++) {
-			float currentY = Mathf.Sin (0.5f*(currentX + offset));
+			float currentY = Mathf.Sin (multiplier*(currentX + offset));
 			vectors [i] = new Vector3 (currentX, currentY, 0);
 			xValues [i] = currentX;
 			currentX += gap;
@@ -31,7 +33,7 @@ public class Wave : MonoBehaviour {
 
 	void Update () {
 		for (int i = 0; i < size; i++) {
-			float currentY = Mathf.Sin (0.5f*(xValues[i] + offset));
+			float currentY = Mathf.Sin (multiplier*(xValues[i] + offset));
 			vectors [i] = new Vector3 (xValues[i], currentY, 0);
 		}
 		offset += gap;
