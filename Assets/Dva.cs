@@ -30,6 +30,8 @@ public class Dva : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (startSpawn && !isSpawning) {
+			AudioSource audio = GetComponent<AudioSource>();
+			audio.Play ();
 			isSpawning = true;
 			transform.position = new Vector3(x, y, 0.0f);
 		}
