@@ -22,6 +22,16 @@ public class Level : MonoBehaviour {
 
 	public float happyThreshold; // difference in y that is permissible
 	public float happyDuration;
+
+	public GameObject funnyBubble;
+	public GameObject asolBubble;
+	private SpriteRenderer funnyRenderer;
+	private SpriteRenderer asolRenderer;
+
+
+	public Sprite asol1;
+	public Sprite asol2;
+	public Sprite asol3;
 	
 	//private float timeStart;
 
@@ -69,6 +79,11 @@ public class Level : MonoBehaviour {
 
 		hintText.enabled = false;
 
+		funnyRenderer = funnyBubble.GetComponent<SpriteRenderer>();
+		asolRenderer = asolBubble.GetComponent<SpriteRenderer>();
+		funnyRenderer.enabled = false;
+		asolRenderer.enabled = false;
+
 	}
 
 	private void nextLevel() {
@@ -101,6 +116,25 @@ public class Level : MonoBehaviour {
 		timeoutTime = dvaSpawnTime * 1.5f;
 
 		hintText.enabled = false;
+
+		funnyRenderer.enabled = false;
+		asolRenderer.enabled = false;
+
+		if (Random.Range(0f, 1f) < 0.4f) {
+			funnyRenderer.enabled = true;
+		} else {
+			float randMessage = Random.Range(0f, 1f);
+			if (randMessage < 0.4f) {
+				asolRenderer.sprite = asol1;
+			} else if (randMessage < 0.7f) {
+				asolRenderer.sprite = asol2;
+			} else {
+				asolRenderer.sprite = asol3;
+			}
+			asolRenderer.enabled = true;
+
+		}
+
 	}
 	
 	// Update is called once per frame
@@ -157,6 +191,13 @@ public class Level : MonoBehaviour {
 		} else {
 			this.GetComponent<SpriteRenderer>().sprite = sadSurfer;
 			isHappy = false;
+		}
+
+		// remove chat bubble
+
+		if (time > 1.7f) {
+			asolRenderer.enabled = false;
+			funnyRenderer.enabled = false;
 		}
 
 
@@ -224,9 +265,6 @@ public class Level : MonoBehaviour {
 
 				//SceneManager.LoadScene ("greetings");
 			}
-
-
-
 
 		} else {
 			counterText.text = "";
