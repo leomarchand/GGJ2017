@@ -34,6 +34,7 @@ public class Level : MonoBehaviour {
 	private Wave targetWaveScript;
 	private float happyTimeStart; // every time we get good, start counting down
 	
+	private GameObject dva;
 
 
 	// Use this for initialization
@@ -59,6 +60,8 @@ public class Level : MonoBehaviour {
 		targetWave = GameObject.FindWithTag("wave");
 		targetWaveScript = targetWave.GetComponent<Wave>();
 
+		dva = GameObject.FindWithTag("dva");
+
 	}
 	
 	// Update is called once per frame
@@ -66,7 +69,11 @@ public class Level : MonoBehaviour {
 		time += Time.deltaTime;
 		timeWave += Time.deltaTime;
 
-		if (Input.anyKeyDown) {
+		if (Input.GetButtonDown("Jump")) {
+			// spawn dva
+			Dva.startSpawn = true;
+
+		} else if (Input.anyKeyDown) {
 			//bpm += 1f;
 			taps.Add(time);
 		}
