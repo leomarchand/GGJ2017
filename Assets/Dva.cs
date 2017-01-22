@@ -18,8 +18,8 @@ public class Dva : MonoBehaviour {
 
 		
 		thetaIncrement = 0.05f;
-		xInit = 12.0f;//transform.position.x;
-		yInit = -7.5f;//transform.position.y;
+		xInit = 9.6f;//transform.position.x;
+		yInit = -7.6f;//transform.position.y;
 
 		theta = 0f;
 		x = xInit;

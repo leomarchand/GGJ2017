@@ -10,7 +10,7 @@ public class RunningAsol : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		xPosition = 5.9f;
+		xPosition = Camera.main.orthographicSize * Camera.main.aspect - 0.8f;
 		targetWave = GameObject.FindWithTag("wave");
 		targetWaveScript = targetWave.GetComponent<Wave>();
 	}

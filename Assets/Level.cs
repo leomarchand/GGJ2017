@@ -74,6 +74,10 @@ public class Level : MonoBehaviour {
 		time += Time.deltaTime;
 		timeWave += Time.deltaTime;
 
+		if (Input.GetButtonDown("Jump")) {
+			Dva.startSpawn = true;
+		}
+
 
 		if (Input.anyKeyDown) {
 			//bpm += 1f;
