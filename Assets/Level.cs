@@ -274,15 +274,15 @@ public class Level : MonoBehaviour {
 		}
 
 
-		debugText.text = "level: " + levelNum.ToString("0.##") +  
-			"\n happyThreshold: " + happyThreshold.ToString("0.##") +
-			"\n happyDuration: " + happyDuration.ToString("0.##") +
-			"\n difficulty: " + Wave.multiplier.ToString("0.##") + 
+		debugText.text = "level / 레벨: " + levelNum.ToString();
+			//"\n happyThreshold: " + happyThreshold.ToString("0.##") +
+			//"\n happyDuration: " + happyDuration.ToString("0.##") +
+			//"\n difficulty: " + Wave.multiplier.ToString("0.##") + 
 			//"\ntime: " + time.ToString("0.##") + 
 			//"\nbpm: " + bpm.ToString("0.##") +
 			//"\n\ntimeWave: " + timeWave.ToString("0.##") + 
 			//"\nposition.y: " + y.ToString("0.##") + 
-			"\nfrequency: " + freq.ToString("0.##");
+			//"\nfrequency: " + freq.ToString("0.##");
 			//"\n\ntargetY: " + targetY.ToString("0.##") +
 			//"\n targetDist: " + targetDist.ToString("0.##");
 
