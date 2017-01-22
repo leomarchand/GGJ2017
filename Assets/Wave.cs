@@ -15,7 +15,7 @@ public class Wave : MonoBehaviour {
 	public static float maxFreq;
 	public static float multiplier;
 
-	void Start () {
+	public void Start () {
 		lineRenderer = this.gameObject.GetComponent <LineRenderer> ();
 		lineRenderer.numPositions = size;
 		lineRenderer.startWidth = 0.1f;

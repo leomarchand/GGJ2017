@@ -45,8 +45,6 @@ public class Level : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		QualitySettings.vSyncCount = 0;
-		Application.targetFrameRate = 60;
 
 		freq = 1f;
 
@@ -72,6 +70,34 @@ public class Level : MonoBehaviour {
 
 		hintText.enabled = false;
 
+	}
+
+	private void nextLevel() {
+		//freq = 1f;
+
+		//tapInterval = 6f;
+		taps = new List<float>();
+
+		happyThreshold = MainMenu.happyThreshold;
+		happyDuration = MainMenu.happyDuration;
+
+		//isGoingUp = true;
+		//isHappy = false;
+
+		time = 0f;
+		//timeWave = 0f;
+		//bpm = 0f;
+
+		targetWave = GameObject.FindWithTag("wave");
+		targetWaveScript = targetWave.GetComponent<Wave>();
+
+		targetWaveScript.Start();
+
+		dvaSpawnTime = Random.Range(20.0f, 40.0f);
+		hasSpawnedDva = false;
+		timeoutTime = dvaSpawnTime * 1.5f;
+
+		hintText.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -187,7 +213,9 @@ public class Level : MonoBehaviour {
 
 				MainMenu.happyDuration = 0.22f / Wave.multiplier + 0.52f;
 
-				SceneManager.LoadScene ("greetings");
+				nextLevel();
+
+				//SceneManager.LoadScene ("greetings");
 			}
 
 

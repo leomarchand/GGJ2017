@@ -8,9 +8,16 @@ public class MainMenu : MonoBehaviour {
 	public static float happyThreshold; // difference in y that is permissible
 	public static float happyDuration;
 
+
+
 	// Use this for initialization
 	void Start () {
+		QualitySettings.vSyncCount = 0;
+		Application.targetFrameRate = 60;
+
 		Level.levelNum = 1;
+
+
 		Wave.minFreq = 0.1f;
 		Wave.maxFreq = 0.25f;
 		Wave.multiplier = Random.Range(Wave.minFreq, Wave.maxFreq);
