@@ -302,9 +302,11 @@ public class Level : MonoBehaviour {
 
 	IEnumerator playMusic() {
 		audio.clip = startClip;
+		audio.loop = false;
 		audio.Play();
 		yield return new WaitForSeconds(audio.clip.length);
 		audio.clip = musicClip;
+		audio.loop = true;
 		audio.Play();
 	}
 
