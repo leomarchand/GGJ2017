@@ -11,6 +11,9 @@ public class Scoreboard : MonoBehaviour {
 	public Text fourthText;
 	public Text fifthText;
 
+	public static string playerName;
+	public static int playerScore;
+
 	private struct highscore {
 		public string name;
 		public int score;

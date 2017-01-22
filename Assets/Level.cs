@@ -12,6 +12,7 @@ public class Level : MonoBehaviour {
 	public Text debugText;
 	public Text counterText;
 	public Text hintText;
+	public Text timeoutText;
 
 	public static float tapInterval;
 	public List<float> taps;
@@ -37,6 +38,9 @@ public class Level : MonoBehaviour {
 
 	private float dvaSpawnTime;
 	private bool hasSpawnedDva;
+
+	private float timeoutTime;
+	private float timeRemaining;
 	
 
 	// Use this for initialization
@@ -64,6 +68,7 @@ public class Level : MonoBehaviour {
 
 		dvaSpawnTime = Random.Range(20.0f, 40.0f);
 		hasSpawnedDva = false;
+		timeoutTime = dvaSpawnTime * 1.5f;
 
 		hintText.enabled = false;
 
@@ -74,9 +79,9 @@ public class Level : MonoBehaviour {
 		time += Time.deltaTime;
 		timeWave += Time.deltaTime;
 
-		if (Input.GetButtonDown("Jump")) {
-			Dva.startSpawn = true;
-		}
+		// if (Input.GetButtonDown("Jump")) {
+		// 	Dva.startSpawn = true;
+		// }
 
 
 		if (Input.anyKeyDown) {
@@ -131,6 +136,16 @@ public class Level : MonoBehaviour {
 			// spawn dva
 			Dva.startSpawn = true;
 			hasSpawnedDva = true;
+		}
+
+		// display the timeout text
+		timeRemaining = timeoutTime - time;
+
+		if (timeRemaining < 10.0f) {
+			timeoutText.text = timeRemaining.ToString("0") + "s until giving up" +
+				"\n" + timeRemaining.ToString("0") + "초 후에 포기";
+		} else {
+			timeoutText.text = "";
 		}
 
 		// display the instruction text on level 1
