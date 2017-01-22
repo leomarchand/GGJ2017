@@ -6,11 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class Scoreboard : MonoBehaviour {
 
-	public Text firstText;
-	public Text secondText;
-	public Text thirdText;
-	public Text fourthText;
-	public Text fifthText;
+	public Text name1Text, name2Text, name3Text, name4Text, name5Text;
+	public Text score1Text, score2Text, score3Text, score4Text, score5Text;
+
 
 	public static string playerName;
 	public static int playerScore;
@@ -46,7 +44,7 @@ public class Scoreboard : MonoBehaviour {
 
 		for (int i = 0; i < 5; i++) {
 			scoreList.Add(new highscore(
-				PlayerPrefs.GetString(i.ToString() + "name", ""),
+				PlayerPrefs.GetString(i.ToString() + "name", "towelboy"),
 				PlayerPrefs.GetInt(i.ToString() + "score", 0)));
 		}
 
@@ -75,11 +73,17 @@ public class Scoreboard : MonoBehaviour {
 			PlayerPrefs.Save(); 
 		}
 
-		firstText.text = interfaceTextForScore(scoreList[0]);
-		secondText.text = interfaceTextForScore(scoreList[1]);
-		thirdText.text = interfaceTextForScore(scoreList[2]);
-		fourthText.text = interfaceTextForScore(scoreList[3]);
-		fifthText.text = interfaceTextForScore(scoreList[4]);
+		name1Text.text = scoreList[0].name;
+		name2Text.text = scoreList[1].name;
+		name3Text.text = scoreList[2].name;
+		name4Text.text = scoreList[3].name;
+		name5Text.text = scoreList[4].name;
+
+		score1Text.text = scoreList[0].score.ToString() + " -";
+		score2Text.text = scoreList[1].score.ToString() + " -";
+		score3Text.text = scoreList[2].score.ToString() + " -";
+		score4Text.text = scoreList[3].score.ToString() + " -";
+		score5Text.text = scoreList[4].score.ToString() + " -";
 
 
 	}
@@ -91,7 +95,5 @@ public class Scoreboard : MonoBehaviour {
 		}
 	}
 
-	string interfaceTextForScore(highscore score) {
-		return score.name + " - " + score.score.ToString();
-	}
+
 }
