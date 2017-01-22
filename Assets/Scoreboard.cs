@@ -1,8 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Scoreboard : MonoBehaviour {
+
+	public Text firstText;
+	public Text secondText;
+	public Text thirdText;
+	public Text fourthText;
+	public Text fifthText;
 
 	private struct highscore {
 		public string name;
@@ -15,7 +22,6 @@ public class Scoreboard : MonoBehaviour {
 	}
 
 	private List<highscore> scoreList;
-
 
 	// Use this for initialization
 	void Start () {
@@ -31,8 +37,8 @@ public class Scoreboard : MonoBehaviour {
 
 		for (int i = 0; i < scoreList.Count; i++) {
 
-			PlayerPrefs.SetString(i.ToString() + "name", scoreList[0].name);
-			PlayerPrefs.SetInt(i.ToString() + "score", scoreList[0].score);
+			PlayerPrefs.SetString(i.ToString() + "name", scoreList[i].name);
+			PlayerPrefs.SetInt(i.ToString() + "score", scoreList[i].score);
 
 		}
 
