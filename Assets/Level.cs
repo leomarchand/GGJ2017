@@ -96,11 +96,13 @@ public class Level : MonoBehaviour {
 			taps[i] -= time;
 		}
 
+		happyTimeStart = 0f;
+
 		happyThreshold = MainMenu.happyThreshold;
 		happyDuration = MainMenu.happyDuration;
 
 		//isGoingUp = true;
-		//isHappy = false;
+		isHappy = false;
 
 		time = 0f;
 		//timeWave = 0f;
