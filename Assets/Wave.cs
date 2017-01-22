@@ -11,10 +11,11 @@ public class Wave : MonoBehaviour {
 	private float minX;
 	private float maxX;
 	private float gap;
-	private float multiplier;
+	public static float minFreq;
+	public static float maxFreq;
+	public static float multiplier;
 
 	void Start () {
-		multiplier = Random.Range (0f, 1f);
 		lineRenderer = this.gameObject.GetComponent <LineRenderer> ();
 		lineRenderer.numPositions = size;
 		lineRenderer.startWidth = 0.1f;

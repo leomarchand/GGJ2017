@@ -7,11 +7,9 @@ public class TailWave : MonoBehaviour {
 	private Vector3 [] vectors;
 	private float [] xValues;
 	private LineRenderer lineRenderer;
-	private float offset = 0f;
 	private float minX;
 	private float maxX;
 	private float gap;
-	private float multiplier;
 
     private List<float> history;
     private GameObject ball;
@@ -30,7 +28,6 @@ public class TailWave : MonoBehaviour {
         vectors = new Vector3 [size];
         xValues = new float [size];
 
-        multiplier = Random.Range (0f, 1f);
 		lineRenderer = this.gameObject.GetComponent <LineRenderer> ();
 		lineRenderer.numPositions = size;
 		lineRenderer.startWidth = 0.1f;
