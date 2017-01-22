@@ -76,7 +76,11 @@ public class Level : MonoBehaviour {
 		//freq = 1f;
 
 		//tapInterval = 6f;
-		taps = new List<float>();
+		//taps = new List<float>();
+
+		for (int i = 0; i < taps.Count; i++) {
+			taps[i] -= time;
+		}
 
 		happyThreshold = MainMenu.happyThreshold;
 		happyDuration = MainMenu.happyDuration;
@@ -86,7 +90,7 @@ public class Level : MonoBehaviour {
 
 		time = 0f;
 		//timeWave = 0f;
-		//bpm = 0f;
+		//bpm = 0.1f;
 
 		targetWave = GameObject.FindWithTag("wave");
 		targetWaveScript = targetWave.GetComponent<Wave>();
