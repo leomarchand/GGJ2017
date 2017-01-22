@@ -129,6 +129,19 @@ public class Level : MonoBehaviour {
 			hasSpawnedDva = true;
 		}
 
+		// display the instruction text on level 1
+		if (levelNum < 3) {
+			if (time < 10f) {
+				if (Mathf.FloorToInt(time*5) % 2 == 1) {
+					hintText.enabled = true;
+				} else {
+					hintText.enabled = false;
+				}
+			} else {
+				hintText.enabled = false;
+			}
+		}
+
 		// display the countdown
 		if (isHappy) {
 			float happyTimeElapsed = time - happyTimeStart;
