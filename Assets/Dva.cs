@@ -16,15 +16,15 @@ public class Dva : MonoBehaviour {
 	void Start () {
 		startSpawn = false;
 		theta = 0f;
-		x = transform.position.x;
-		y = transform.position.y;
+		x = 8.0f;//transform.position.x;
+		y = -3.5f;//transform.position.y;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (startSpawn && !isSpawning) {
 			isSpawning = true;
-			transform.position = new Vector3(8, -3.5, 0);
+			transform.position = new Vector3(x, y, 0.0f);
 		}
 
 
