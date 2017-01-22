@@ -32,6 +32,10 @@ public class Level : MonoBehaviour {
 	public Sprite asol1;
 	public Sprite asol2;
 	public Sprite asol3;
+
+	public AudioClip startClip;
+	public AudioClip musicClip;
+	private AudioSource audio;
 	
 	//private float timeStart;
 
@@ -83,6 +87,10 @@ public class Level : MonoBehaviour {
 		asolRenderer = asolBubble.GetComponent<SpriteRenderer>();
 		funnyRenderer.enabled = false;
 		asolRenderer.enabled = false;
+
+		audio = GetComponent<AudioSource>();
+
+		StartCoroutine(playMusic());
 
 	}
 
@@ -136,6 +144,7 @@ public class Level : MonoBehaviour {
 			asolRenderer.enabled = true;
 
 		}
+		
 
 	}
 	
@@ -251,8 +260,8 @@ public class Level : MonoBehaviour {
 			} else {
 				counterText.text = "0";
 				// WIN!
-				AudioSource audio = GetComponent<AudioSource>();
-				audio.Play ();
+				
+				StartCoroutine(playMusic());
 				// increase difficulty
 				levelNum++;
 				MainMenu.happyThreshold -= 0.04f;
@@ -289,6 +298,14 @@ public class Level : MonoBehaviour {
 		// Debug.Log(freqText.text);
 		// Debug.Log(Mathf.Sin(timeWave));
 		
+	}
+
+	IEnumerator playMusic() {
+		audio.clip = startClip;
+		audio.Play();
+		yield return new WaitForSeconds(audio.clip.length);
+		audio.clip = musicClip;
+		audio.Play();
 	}
 
 	private float UpdatePlayerFreq(float t) {
