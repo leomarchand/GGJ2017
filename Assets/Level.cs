@@ -211,9 +211,9 @@ public class Level : MonoBehaviour {
 		// display the timeout text
 		timeRemaining = timeoutTime - time;
 
-		if (timeRemaining < 0f) {
+		if (timeRemaining <= 0f) {
 			// asol ran away..
-			SceneManager.LoadScene("scoreboard");
+			SceneManager.LoadScene("nameentry");
 
 		} else if (timeRemaining < 10.0f) {
 			timeoutText.text = timeRemaining.ToString("0") + "s until giving up" +
