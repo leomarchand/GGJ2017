@@ -251,7 +251,8 @@ public class Level : MonoBehaviour {
 			} else {
 				counterText.text = "0";
 				// WIN!
-
+				AudioSource audio = GetComponent<AudioSource>();
+				audio.Play ();
 				// increase difficulty
 				levelNum++;
 				MainMenu.happyThreshold -= 0.04f;
