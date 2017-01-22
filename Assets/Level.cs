@@ -33,9 +33,10 @@ public class Level : MonoBehaviour {
 	private GameObject targetWave;
 	private Wave targetWaveScript;
 	private float happyTimeStart; // every time we get good, start counting down
-	
-	private GameObject dva;
 
+	private float dvaSpawnTime;
+	private bool hasSpawnedDva;
+	
 
 	// Use this for initialization
 	void Start () {
@@ -60,7 +61,8 @@ public class Level : MonoBehaviour {
 		targetWave = GameObject.FindWithTag("wave");
 		targetWaveScript = targetWave.GetComponent<Wave>();
 
-		dva = GameObject.FindWithTag("dva");
+		dvaSpawnTime = Random.Range(20.0f, 40.0f);
+		hasSpawnedDva = false;
 
 	}
 	
@@ -69,11 +71,8 @@ public class Level : MonoBehaviour {
 		time += Time.deltaTime;
 		timeWave += Time.deltaTime;
 
-		if (Input.GetButtonDown("Jump")) {
-			// spawn dva
-			Dva.startSpawn = true;
 
-		} else if (Input.anyKeyDown) {
+		if (Input.anyKeyDown) {
 			//bpm += 1f;
 			taps.Add(time);
 		}
@@ -117,6 +116,14 @@ public class Level : MonoBehaviour {
 		} else {
 			this.GetComponent<SpriteRenderer>().sprite = sadSurfer;
 			isHappy = false;
+		}
+
+
+		// secret DVA display condition
+		if (levelNum > 6 && time > dvaSpawnTime && !hasSpawnedDva) {
+			// spawn dva
+			Dva.startSpawn = true;
+			hasSpawnedDva = true;
 		}
 
 		// display the countdown
