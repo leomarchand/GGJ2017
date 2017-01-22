@@ -22,10 +22,7 @@ public class TailWave : MonoBehaviour {
         ball = GameObject.FindWithTag("Player");
         ballY = ball.transform.position.y;
         history = new List<float>();
-
-        GameObject targetWave = GameObject.FindWithTag("wave");
-		Wave targetWaveScript = targetWave.GetComponent<Wave>();
-
+        
         size = Wave.size / 2;
 
         vectors = new Vector3 [size];

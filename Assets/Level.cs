@@ -11,6 +11,7 @@ public class Level : MonoBehaviour {
 	public float freq;
 	public Text debugText;
 	public Text counterText;
+	public Text hintText;
 
 	public static float tapInterval;
 	public List<float> taps;
@@ -63,6 +64,8 @@ public class Level : MonoBehaviour {
 
 		dvaSpawnTime = Random.Range(20.0f, 40.0f);
 		hasSpawnedDva = false;
+
+		hintText.enabled = false;
 
 	}
 	
