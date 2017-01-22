@@ -15,6 +15,9 @@ public class TailWave : MonoBehaviour {
     private GameObject ball;
     private float ballY;
 
+    public Material happyMat;
+    public Material sadMat;
+
 	void Start () {
         ball = GameObject.FindWithTag("Player");
         ballY = ball.transform.position.y;
@@ -56,6 +59,12 @@ public class TailWave : MonoBehaviour {
 			vectors [i] = new Vector3 (xValues[i], history[i], 0);
 		}
 		lineRenderer.SetPositions (vectors);
+
+        if (Level.isHappy) {
+            lineRenderer.material = happyMat;
+        } else {
+            lineRenderer.material = sadMat;
+        }
 	}
 
 }
