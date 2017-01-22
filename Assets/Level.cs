@@ -22,7 +22,6 @@ public class Level : MonoBehaviour {
 
 	public float happyThreshold; // difference in y that is permissible
 	public float happyDuration;
-
 	
 	//private float timeStart;
 
@@ -171,7 +170,11 @@ public class Level : MonoBehaviour {
 		// display the timeout text
 		timeRemaining = timeoutTime - time;
 
-		if (timeRemaining < 10.0f) {
+		if (timeRemaining < 0f) {
+			// asol ran away..
+			SceneManager.LoadScene("scoreboard");
+
+		} else if (timeRemaining < 10.0f) {
 			timeoutText.text = timeRemaining.ToString("0") + "s until giving up" +
 				"\n" + timeRemaining.ToString("0") + "초 후에 포기";
 		} else {

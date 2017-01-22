@@ -49,6 +49,13 @@ public class Scoreboard : MonoBehaviour {
 
 		// load scores from playerprefs
 
+		scoreList = new List<highscore>();
+
+		for (int i = 0; i < 5; i++) {
+			scoreList.Add(new highscore(
+				PlayerPrefs.GetString(i.ToString() + "name"),
+				PlayerPrefs.GetInt(i.ToString() + "score")));
+		}
 
 		// update scores
 
